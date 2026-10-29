@@ -10,10 +10,7 @@ import java.sql.*;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
-/**
- * Lucius server: REST + WebSocket chat, SQLite storage, bcrypt passwords,
- * bearer-token sessions.
- */
+
 public class Server {
   static final ObjectMapper J = new ObjectMapper();
   static final SecureRandom RNG = new SecureRandom();
@@ -22,7 +19,7 @@ public class Server {
   static final Map<String, Deque<Long>> fails = new ConcurrentHashMap<>();
   static Connection db;
 
-  // ---- database helpers ----
+
   static synchronized List<Map<String, Object>> q(String sql, Object... a) throws SQLException {
     try (var p = db.prepareStatement(sql)) {
       for (int i = 0; i < a.length; i++)
@@ -52,7 +49,7 @@ public class Server {
     }
   }
 
-  // ---- small utilities ----
+ 
   static int id(Map<String, Object> m, String k) {
     return ((Number) m.get(k)).intValue();
   }
@@ -105,7 +102,7 @@ public class Server {
     }
   }
 
-  // ---- auth / data helpers ----
+ 
   static String session(int uid) throws SQLException {
     byte[] b = new byte[32];
     RNG.nextBytes(b);
